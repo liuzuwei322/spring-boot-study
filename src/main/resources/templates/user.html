@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>[[${value}]]</title>
+</head>
+<body>
+<div class="div-content">
+    <di>
+        <p>[[${value}]]</p>
+        <a th:href="@{/index}">返回</a>
+    </di>
+</div>
+
+</body>
+</html>
+<style>
+    .div-content {
+        width:100%;
+        margin:0px auto;
+        text-align:center;
+    }
+</style>
