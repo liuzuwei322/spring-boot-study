@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class KafkaProduceController {
 
     private static final Logger logger = LoggerFactory.getLogger(KafkaProduceController.class);
-    private static final String TOPIC = "labelEngineWebLog_from_machineB_test001";
+    private static final String TOPIC = "test";
 
     @Autowired
     private KafkaTemplate kafkaTemplate;

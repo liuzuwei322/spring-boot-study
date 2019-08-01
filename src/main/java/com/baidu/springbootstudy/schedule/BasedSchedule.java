@@ -17,6 +17,6 @@ public class BasedSchedule {
 
     @Scheduled(cron="0/30 * *  * * ? ")
     private void test () {
-        kafkaTemplate.send("labelEngineWebLog_from_machineB_test001", "你好");
+        kafkaTemplate.send("test", "你好");
     }
 }
