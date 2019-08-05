@@ -1,13 +1,12 @@
 package com.baidu.springbootstudy.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class User implements Serializable {
+public class Person {
     private Integer id;
     private String userName;
     private String password;
-    private Date createTime;
+    private String createTime;
     private String status;
 
     public Integer getId() {
@@ -34,11 +33,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
@@ -52,7 +51,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "Person {" +
                 "id=" + id +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +

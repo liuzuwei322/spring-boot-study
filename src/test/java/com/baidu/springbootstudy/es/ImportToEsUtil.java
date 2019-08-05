@@ -56,7 +56,7 @@ public class ImportToEsUtil {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
         String[] res = new String[n];
         for(int i =0; i < n; i++) {
-            res[i] = simpleDateFormat.format(new Date(curTime + i * oneDayDelta));
+            res[i] = simpleDateFormat.format(new Date(curTime - i * oneDayDelta));
         }
         return res;
     }

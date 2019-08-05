@@ -1,6 +1,10 @@
 package com.baidu.springbootstudy.test;
 
+import com.baidu.springbootstudy.es.ImportToEsUtil;
 import org.junit.Test;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class TestApp {
     private static ThreadLocal<String> threadLocal = new ThreadLocal<String>(){
@@ -27,5 +31,19 @@ public class TestApp {
             System.out.println(split[i]);
         }
         System.out.println(local.get());
+    }
+
+    @Test
+    public void date () {
+        String[] day = ImportToEsUtil.getLastNDaysArr(66);
+        for (int i = 1; i< day.length; i++) {
+            System.out.println(day[i]);
+        }
+    }
+
+    @Test
+    public void list () {
+        List<String> list = Arrays.asList("1", "2");
+        System.out.println(list.get(8));
     }
 }

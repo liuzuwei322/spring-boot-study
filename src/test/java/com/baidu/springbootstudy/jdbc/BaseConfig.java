@@ -16,7 +16,7 @@ import java.util.*;
 
 public class BaseConfig {
 
-    public String url = "jdbc:mysql://10.95.101.158:8035/liuzuwei?rewriteBatchedStatements=true";
+    public String url = "jdbc:mysql://10.95.101.158:8035/datatrans?rewriteBatchedStatements=true";
     public String user = "mysql";
     public String password = "label_engine@mj";
 

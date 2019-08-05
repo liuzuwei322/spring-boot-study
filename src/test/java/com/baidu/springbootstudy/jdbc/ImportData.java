@@ -31,6 +31,7 @@ public class ImportData extends BaseConfig {
                 return;
             }
             for (int i = 0; i < fileList.length; i++) {
+                System.out.println("新插入数据文件：" + fileList[i]);
                 fr = new FileReader(dataFilePath + File.separator + fileList[i]);
                 br = new BufferedReader(fr);
                 List<String> list = map.get(fileList[i]);
@@ -40,8 +41,7 @@ public class ImportData extends BaseConfig {
                 String sql = "delete from " + tableName;
                 pstm = conn.prepareStatement(sql);
                 pstm.executeUpdate();
-                System.out.println(tableName +"表数据删除成功");
-                System.out.println("新插入数据文件：" + fileList[i]);
+                System.out.println("删除表：" + tableName);
 
                 // 拼接sql
                 StringBuffer sb = new StringBuffer();
@@ -61,15 +61,17 @@ public class ImportData extends BaseConfig {
                 sb.append(filds+" VALUES("+values);
                 System.out.println("插入Sql："+sb.toString());
                 pstm = conn.prepareStatement(sb.toString());
+                int count = 0;
                 while((line = br.readLine()) != null) {
                     JSONObject jsonObject = JSON.parseObject(line);
                     for (int k = 1; k < list.size(); k++) {
                         pstm.setString(k, jsonObject.getString(list.get(k)));
+                        count++;
                     }
                     pstm.addBatch();
                 }
                 pstm.executeBatch();
-                System.out.println("插入成功");
+                System.out.println("成功插入" + count + "条记录");
                 System.out.println();
             }
             if (fr != null) {
