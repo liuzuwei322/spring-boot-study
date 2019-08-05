@@ -60,4 +60,22 @@ public class ImportToEsUtil {
         }
         return res;
     }
+
+    public static String[] getRangeDays (int after, int before) {
+        long oneDayDelta = 60L * 60L * 24L * 1000L;
+        long curTime = System.currentTimeMillis();
+        int count = after + before;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+        String[] res = new String[count -1];
+
+        for(int i = 0; i < before; i++) {
+            res[before - i - 1] = simpleDateFormat.format(new Date(curTime - i * oneDayDelta));
+        }
+
+        for(int i = 1; i < after; i++) {
+            res[before + i -1] = simpleDateFormat.format(new Date(curTime + i * oneDayDelta));
+        }
+
+        return res;
+    }
 }

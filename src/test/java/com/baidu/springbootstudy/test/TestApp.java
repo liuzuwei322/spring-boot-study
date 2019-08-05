@@ -42,6 +42,14 @@ public class TestApp {
     }
 
     @Test
+    public void rangeDate () {
+        String[] day = ImportToEsUtil.getRangeDays(57, 66);
+        for (int i = 0; i< day.length; i++) {
+            System.out.println(day[i]);
+        }
+    }
+
+    @Test
     public void list () {
         List<String> list = Arrays.asList("1", "2");
         System.out.println(list.get(8));

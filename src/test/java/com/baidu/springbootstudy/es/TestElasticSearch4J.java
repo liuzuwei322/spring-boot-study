@@ -15,14 +15,14 @@ import java.io.IOException;
 import java.util.*;
 
 public class TestElasticSearch4J {
-    private static List<String> certificateCode = new ArrayList<String>();
-    private static List<String> faceIdList = new ArrayList<String>();
-    private static List<String> imsiList = new ArrayList<String>();
-    private static List<String> plateNumberList = new ArrayList<String>();
-    private static List<String> rfidList = new ArrayList<String>();
+    private static List<String> certificateCode = new ArrayList<>();
+    private static List<String> faceIdList = new ArrayList<>();
+    private static List<String> imsiList = new ArrayList<>();
+    private static List<String> plateNumberList = new ArrayList<>();
+    private static List<String> rfidList = new ArrayList<>();
 
-    private static List<String> placeSet = new ArrayList<String>();
-    private static List<String> tantouId = new ArrayList<String>();
+    private static List<String> placeSet = new ArrayList<>();
+    private static List<String> tantouId = new ArrayList<>();
     private static List<String> types = Arrays.asList("sfzh", "face_id", "imsi", "plate_number", "rfid");
     private static Map<String, List<String>> typeMap = new HashMap<>();
     private static RestHighLevelClient client = new RestHighLevelClient(
@@ -121,14 +121,14 @@ public class TestElasticSearch4J {
     }
 
     private static void mockData (String indexName){
-//        if (!checkIndexIsExit(indexName)) {
-//            createIndex(indexName);
-//        } else {
-//            deleteIndex(indexName);
-//        }
-//        if (1 == 11) {
-//            return;
-//        }
+        if (!checkIndexIsExit(indexName)) {
+            createIndex(indexName);
+        } else {
+            deleteIndex(indexName);
+        }
+        if (1 == 11) {
+            return;
+        }
         List<Map<String, Object>> list = new LinkedList<Map<String, Object>>();
         Random random = new Random();
         for (int i = 0; i< certificateCode.size() * 5; i++) {
@@ -159,7 +159,7 @@ public class TestElasticSearch4J {
             map.put("id", i + 1);
             list.add(map);
         }
-        //batchInsert(indexName, list);
+        batchInsert(indexName, list);
     }
 
     public static void insert (String indexName) {
