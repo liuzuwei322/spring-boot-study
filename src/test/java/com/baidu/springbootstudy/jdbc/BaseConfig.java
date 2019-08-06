@@ -16,9 +16,9 @@ import java.util.*;
 
 public class BaseConfig {
 
-    public String url = "jdbc:mysql://10.95.101.158:8035/datatrans?rewriteBatchedStatements=true";
-    public String user = "mysql";
-    public String password = "label_engine@mj";
+    public String url = "jdbc:mysql://localhost:3306/datatrans?rewriteBatchedStatements=true";
+    public String user = "root";
+    public String password = "root";
 
     Connection conn = null;
     PreparedStatement pstm =null;

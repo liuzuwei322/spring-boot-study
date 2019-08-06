@@ -14,7 +14,7 @@ import org.elasticsearch.client.RestHighLevelClient;
 import java.io.IOException;
 import java.util.*;
 
-public class TestElasticSearch4J {
+public class ElasticSearch4JApp {
     private static List<String> certificateCode = new ArrayList<>();
     private static List<String> faceIdList = new ArrayList<>();
     private static List<String> imsiList = new ArrayList<>();
@@ -28,9 +28,10 @@ public class TestElasticSearch4J {
     private static RestHighLevelClient client = new RestHighLevelClient(
             RestClient.builder(new HttpHost("10.133.143.27", 8089, "http")));
 
+
     public static void main(String[] args) {
         // 暂口
-        String zankou = JSONUtils.readJsonFile("D:\\files\\zankou.json");
+        String zankou = ESUtil.readJsonFile("D:\\files\\zankou.json");
         JSONObject zankouJson = JSONObject.parseObject(zankou);
         JSONArray zankouJsonArray = zankouJson.getJSONArray("RECORDS");
 
@@ -54,7 +55,7 @@ public class TestElasticSearch4J {
         }
 
         // 常口
-        String czrk = JSONUtils.readJsonFile("D:\\files\\czrk.json");
+        String czrk = ESUtil.readJsonFile("D:\\files\\czrk.json");
         JSONObject czrkJson = JSONObject.parseObject(czrk);
         JSONArray czrkJsonArray = czrkJson.getJSONArray("RECORDS");
 
@@ -78,7 +79,7 @@ public class TestElasticSearch4J {
         }
 
         // 漏控
-        String lkrk = JSONUtils.readJsonFile("D:\\files\\lkrk.json");
+        String lkrk = ESUtil.readJsonFile("D:\\files\\lkrk.json");
         JSONObject lkrkJson = JSONObject.parseObject(lkrk);
         JSONArray lkrkJsonArray = lkrkJson.getJSONArray("RECORDS");
 
@@ -92,9 +93,9 @@ public class TestElasticSearch4J {
         //certificateCode = ImportToEsUtil.getFileContert("D:\\files\\shang_wang_ji_lu", "Certificate_code");
 
         // 探头名称
-        placeSet = ImportToEsUtil.getFileContert("D:\\files\\tan_tou_info", "name");
+        placeSet = ESUtil.getFileContert("D:\\files\\tan_tou_info", "name");
         // 探头ID
-        tantouId = ImportToEsUtil.getFileContert("D:\\files\\tantou", null);
+        tantouId = ESUtil.getFileContert("D:\\files\\tantou", null);
 
         typeMap.put("sfzh", certificateCode);
         typeMap.put("face_id", faceIdList);
@@ -103,12 +104,12 @@ public class TestElasticSearch4J {
         typeMap.put("rfid", rfidList);
 
 
-        String[] day = ImportToEsUtil.getLastNDaysArr(66);
+        String[] day = ESUtil.getLastNDaysArr(2);
         long startTime = System.currentTimeMillis();
         for (int i = 1; i< day.length; i++) {
-            //System.out.println(day[i]);
-            //deleteIndex("person_track_" + day[i]);
-            mockData("person_track_" + day[i]);
+            // deleteIndex("person_track_" + day[i]);
+            // mockData("person_track_" + day[i]);
+            mockData("test_lzw_" + day[i]);
         }
         long endTime = System.currentTimeMillis();
         long time = (endTime - startTime) / 1000;

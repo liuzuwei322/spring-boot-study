@@ -1,6 +1,6 @@
 package com.baidu.springbootstudy.test;
 
-import com.baidu.springbootstudy.es.ImportToEsUtil;
+import com.baidu.springbootstudy.es.ESUtil;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -35,7 +35,7 @@ public class TestApp {
 
     @Test
     public void date () {
-        String[] day = ImportToEsUtil.getLastNDaysArr(66);
+        String[] day = ESUtil.getLastNDaysArr(66);
         for (int i = 1; i< day.length; i++) {
             System.out.println(day[i]);
         }
@@ -43,7 +43,7 @@ public class TestApp {
 
     @Test
     public void rangeDate () {
-        String[] day = ImportToEsUtil.getRangeDays(57, 66);
+        String[] day = ESUtil.getRangeDays(57, 66);
         for (int i = 0; i< day.length; i++) {
             System.out.println(day[i]);
         }
