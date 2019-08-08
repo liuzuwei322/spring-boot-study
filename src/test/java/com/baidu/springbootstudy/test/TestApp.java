@@ -3,8 +3,10 @@ package com.baidu.springbootstudy.test;
 import com.baidu.springbootstudy.es.ESUtil;
 import org.junit.Test;
 
+import java.io.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class TestApp {
     private static ThreadLocal<String> threadLocal = new ThreadLocal<String>(){
@@ -43,7 +45,7 @@ public class TestApp {
 
     @Test
     public void rangeDate () {
-        String[] day = ESUtil.getRangeDays(57, 66);
+        String[] day = ESUtil.getRangeDays(54, 69);
         for (int i = 0; i< day.length; i++) {
             System.out.println(day[i]);
         }
@@ -51,7 +53,20 @@ public class TestApp {
 
     @Test
     public void list () {
-        List<String> list = Arrays.asList("1", "2");
-        System.out.println(list.get(8));
+        List<String> list = Arrays.asList("1 2 3 4");
+        String[] strings = list.get(0).split(" ");
+        System.out.println(strings);
+        System.out.println(Arrays.asList(strings));
+
+        String[] nums = {"1", "2", "3", "4"};
+        System.out.println(Arrays.asList(nums));
+
+    }
+
+    @Test
+    public void flatMap () {
+        List<String> strings = Arrays.asList("hello hi tom jerry", "hello word tom hello", "hi hi tom hello");
+        Stream<String> stream = strings.stream().flatMap(x -> Arrays.asList(x.split(" ")).stream());
+        stream.forEach(System.out::println);
     }
 }
