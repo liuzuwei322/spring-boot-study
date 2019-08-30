@@ -4,15 +4,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.util.Arrays;
 
 public class RunShell {
 
     private static final Logger logger = LoggerFactory.getLogger(RunShell.class.getName());
 
+    String[] linux = {"/bin/sh", "run.sh", "hdfs path", "workspace"};
+
     public static void main(String[] args) {
         try {
+            String cmd = "D:\\files\\ip.bat";
+            Runtime.getRuntime().exec(cmd);
             FileOutputStream outputStream = new FileOutputStream(new File("D:\\files\\cmd.log"), true);
-            Process  p = new ProcessBuilder("ipconfig", "/all").start();
+            //Process  p = new ProcessBuilder("ipconfig", "/all").start();
+            Process p = new ProcessBuilder(Arrays.asList(new String[]{"cmd.exe", "/C", cmd})).start();
+
 
             // 把字节流转化为缓冲字符流，window默认编码格式为GBK,如果不写输出会乱码
             BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream(), "GBK"));

@@ -1,33 +1,59 @@
-package com.baidu.springbootstudy.jdbc;
+package com.baidu.springbootstudy.importmysql;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import org.junit.Test;
-import java.io.*;
-import java.sql.*;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
-public class ImportData extends BaseConfig {
-
-    @Test
-    public void test () {
-        String separator = File.separator;
-        if ("\\".equals(separator)) {
-            System.out.println("Windows");
-        } else if ("/".equals(separator)) {
-            System.out.println("Linux");
+public class ImportData {
+    public static void main(String[] args) {
+        // 初始化配置
+        Map<String, String> config = BaseConfig.init();
+        if (config == null) {
+            System.out.println("初始化失败");
+            return;
         }
+        String user = config.get("user");
+        String url = config.get("url");
+        String password = config.get("password");
+        String path = config.get("path");
+        String datapath = config.get("datapath");
+        Connection conn = null;
+        PreparedStatement pstm =null;
+
+        // 加载驱动
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection(url, user, password);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("驱动加载成功");
+        System.out.println();
+        Map<String, List<String>> map = BaseConfig.getMeta(path);
+
+        // 导入数据
+        importData(conn, pstm, map, datapath);
     }
 
-    @Test
-    public void importData () {
+    public static void importData(Connection conn, PreparedStatement pstm, Map<String, List<String>> map, String dataFilePath) {
         try {
             FileReader fr = null;
             BufferedReader br = null;
             File file = new File(dataFilePath);
             String[] fileList = file.list();
             if (fileList == null) {
-                System.out.println(dataFilePath + " 路径不存在");
+                System.out.println(dataFilePath + " 数据资源路径不存在");
                 return;
             }
             for (int i = 0; i < fileList.length; i++) {
@@ -50,7 +76,7 @@ public class ImportData extends BaseConfig {
 
                 // 拼接sql
                 StringBuffer sb = new StringBuffer();
-                sb.append("INSERT INTO "+tableName+"(");
+                sb.append("INSERT INTO " + tableName + "(");
                 String line = "";
                 String filds = "";
                 String values = "";
@@ -63,8 +89,8 @@ public class ImportData extends BaseConfig {
                     filds += list.get(j) + ",";
                     values += "?,";
                 }
-                sb.append(filds+" VALUES("+values);
-                System.out.println("插入Sql："+sb.toString());
+                sb.append(filds + " VALUES(" + values);
+                System.out.println("插入Sql：" + sb.toString());
                 pstm = conn.prepareStatement(sb.toString());
                 int count = 0;
                 while((line = br.readLine()) != null) {

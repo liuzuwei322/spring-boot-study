@@ -59,4 +59,8 @@ public class Person {
                 ", status='" + status + '\'' +
                 '}';
     }
+
+    public void say(String name) {
+        this.userName = name;
+    }
 }

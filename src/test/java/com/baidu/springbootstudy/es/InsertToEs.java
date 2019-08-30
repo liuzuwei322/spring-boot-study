@@ -17,11 +17,11 @@ import java.util.*;
 
 public class InsertToEs {
     // 常口
-    private static List<String> czrkFields = Arrays.asList("sfzh","rklx","sex","address","jggjdq","name","byzk","zjxy","whcd","udwid","hyzk","id","age");
+    private static List<String> czrkFields = Arrays.asList("sfzh","rklx","sex","address","jggjdq","name","byzk","zjxy","whcd","udwid","hyzk","age");
     // 暂口
-    private static List<String> zzrkFields = Arrays.asList("sfzh","rklx","sex","address","name","rybh","rfid","whcd","udwid","hyzk","id","plate_number","age","face_id","imsi");
+    private static List<String> zzrkFields = Arrays.asList("sfzh","rklx","sex","address","name","rybh","rfid","whcd","udwid","hyzk","plate_number","age","face_id","imsi");
     // 漏控
-    private static List<String> lkrkFields = Arrays.asList("sfzh","rfid","udwid","face_id","id","rybh","plate_number","imsi");
+    private static List<String> lkrkFields = Arrays.asList("sfzh","rfid","udwid","face_id","rybh","plate_number","imsi");
 
     private static RestHighLevelClient client = new RestHighLevelClient(
             RestClient.builder(new HttpHost("10.133.143.27", 8089, "http")));
@@ -126,7 +126,8 @@ public class InsertToEs {
                 String key = typeList.get(j);
                 map.put(key, object.get("_source." + key));
             }
-            map.put("id", i + 1);
+            //map.put("id", i + 1);
+            map.put("id", object.get("_source.udwid"));
             list.add(map);
         }
         System.out.println(list);

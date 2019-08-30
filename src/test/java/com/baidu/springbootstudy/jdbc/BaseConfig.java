@@ -16,9 +16,9 @@ import java.util.*;
 
 public class BaseConfig {
 
-    public String url = "jdbc:mysql://localhost:3306/datatrans?rewriteBatchedStatements=true";
-    public String user = "root";
-    public String password = "root";
+    public String url = "jdbc:mysql://10.95.101.158:8035/datatrans?rewriteBatchedStatements=true";
+    public String user = "mysql";
+    public String password = "label_engine@mj";
 
     Connection conn = null;
     PreparedStatement pstm =null;
@@ -28,7 +28,7 @@ public class BaseConfig {
     // 唯一需要改动的地方
     String basePath = "D:\\files";
     // mock的数据文件路径
-    String dataFilePath = basePath + File.separator + "label_cixi";
+    String dataFilePath = basePath + File.separator + "MockDatas\\record";
     // 表的映射文件路径
     String mappingFilePath = basePath + File.separator + "mapping.txt";
 

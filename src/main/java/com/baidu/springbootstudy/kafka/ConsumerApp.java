@@ -11,7 +11,7 @@ public class ConsumerApp {
 
     private static final Logger logger = LoggerFactory.getLogger(ConsumerApp.class);
 
-    @KafkaListener(topics = "test")
+    @KafkaListener(topics = "labelEngineWebLog_from_machineB_test001")
     public void getMessage (ConsumerRecord<?, ?> record) {
         logger.info("topic = " + record.topic() + ", offset = " + record.offset() + ", value = " + record.value());
     }

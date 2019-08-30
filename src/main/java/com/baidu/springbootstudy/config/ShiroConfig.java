@@ -9,6 +9,8 @@ import org.apache.shiro.web.servlet.SimpleCookie;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 @Configuration
@@ -18,6 +20,11 @@ public class ShiroConfig {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         // 设置secruityManager
         shiroFilterFactoryBean.setSecurityManager(securityManager);
+
+        HashMap<String, Filter> filter = new HashMap<>();
+        filter.put("custom", new ShiroUserFilter());
+        shiroFilterFactoryBean.setFilters(filter);
+
         // 登陆的url
         shiroFilterFactoryBean.setLoginUrl("/login");
         // 登陆成功后的url, 前后端分离的项目，这里设置了没有用
@@ -36,7 +43,8 @@ public class ShiroConfig {
         linkedHashMap.put("/", "anon");
         // 除上以外所有url都必须认证通过才可以访问，未通过认证自动访问LoginUrl
         // user指的是用户认证通过或者配置了Remember Me记住用户登录状态后可访问
-        linkedHashMap.put("/**", "user");
+        // linkedHashMap.put("/**", "user");
+        linkedHashMap.put("/**", "custom");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(linkedHashMap);
 
         return shiroFilterFactoryBean;
