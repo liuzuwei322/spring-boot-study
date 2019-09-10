@@ -16,7 +16,7 @@ import java.io.PrintWriter;
  * 重写shiro的UserFilter，实现通过OPTIONS请求
  * UserFilter会过滤掉所有没有登录cookie的请求
  * PathMatchingFilter则不会
- * @author MDY
+ * @author
  */
 public class ShiroUserFilter extends UserFilter {
     @Override

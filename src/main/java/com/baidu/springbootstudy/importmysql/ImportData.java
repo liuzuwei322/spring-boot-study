@@ -27,7 +27,7 @@ public class ImportData {
         String path = config.get("path");
         String datapath = config.get("datapath");
         Connection conn = null;
-        PreparedStatement pstm =null;
+        PreparedStatement pstm = null;
 
         // 加载驱动
         try {
@@ -66,18 +66,22 @@ public class ImportData {
 
                 br = new BufferedReader(fr);
                 List<String> list = map.get(fileList[i]);
+                if (list == null) {
+                    System.out.println(fileList[i] + " 数据记录没有配置对应的表");
+                    return;
+                }
                 String tableName = list.get(0);
 
                 // 先清空表数据
                 String sql = "delete from " + tableName;
                 pstm = conn.prepareStatement(sql);
                 pstm.executeUpdate();
-                System.out.println("删除表：" + tableName);
+                System.out.println("清空表：" + tableName);
 
                 // 拼接sql
                 StringBuffer sb = new StringBuffer();
                 sb.append("INSERT INTO " + tableName + "(");
-                String line = "";
+                String line;
                 String filds = "";
                 String values = "";
                 for (int j = 1; j < list.size(); j++) {

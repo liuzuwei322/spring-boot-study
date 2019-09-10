@@ -2,14 +2,10 @@
 
 package com.baidu.springbootstudy.entity;
 
-import com.baidu.labelengineweb.enums.RequestErrorType;
-import com.baidu.labelengineweb.enums.RequestStatusType;
-import com.baidu.labelengineweb.utils.StackTraceTools;
-
 /**
  * 统一结果格式 返回json序列化
  *
- * @author  John Wang(wanghanqi@baidu.com)
+ * @author
  *
  */
 
@@ -86,20 +82,13 @@ public class Result<T> {
     }
 
     public void setSuccessed() {
-        setTaskStatus(RequestStatusType.SUCCESSED.getStatus());
-        setMsg(RequestStatusType.SUCCESSED.getMsg());
-        setErrorCode(RequestErrorType.SUCCESSED.getErrorCode());
-        setErrorMsg(RequestErrorType.SUCCESSED.getErrorMsg());
     }
 
     public void setFailed() {
-        setTaskStatus(RequestStatusType.FAILDED.getStatus());
-        setMsg(RequestStatusType.FAILDED.getMsg());
         setErrorCode(-1);
     }
 
     public void setFailed(Exception e) {
-        StackTraceTools.printStackTrace(e);
         setErrorMsg(e.getMessage());
     }
 

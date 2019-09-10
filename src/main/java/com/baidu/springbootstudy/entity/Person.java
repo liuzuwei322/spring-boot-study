@@ -1,7 +1,5 @@
 package com.baidu.springbootstudy.entity;
 
-import java.util.Date;
-
 public class Person {
     private Integer id;
     private String userName;

@@ -18,6 +18,6 @@ public class BasedSchedule {
     @Scheduled(cron="0 0 * * * ? ")
     private void test () {
         String time = this.format.format(new Date());
-        kafkaTemplate.send("labelEngineWebLog_from_machineB_test001", "current time is " + time);
+        kafkaTemplate.send("test", "current time is " + time);
     }
 }
