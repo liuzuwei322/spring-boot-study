@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -155,6 +156,11 @@ public class ESUtil {
     }
 
     public static void main(String[] args) throws  Exception {
+        String[] daysArr = getRangeDays(52, 10);
+        System.out.println(Arrays.asList(daysArr));
+        if (1 == 1) {
+            return;
+        }
         String path = "D:\\files\\zankou.json";
         String s = readJsonFile(path);
         JSONObject jobj = JSONObject.parseObject(s);

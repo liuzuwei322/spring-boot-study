@@ -31,7 +31,7 @@ public class ElasticSearch4JApp {
 
     public static void main(String[] args) {
         // 暂口
-        String zankou = ESUtil.readJsonFile("D:\\files\\zankou.json");
+        String zankou = ESUtil.readJsonFile("D:\\files\\zzrk.json");
         JSONObject zankouJson = JSONObject.parseObject(zankou);
         JSONArray zankouJsonArray = zankouJson.getJSONArray("RECORDS");
 
@@ -104,12 +104,12 @@ public class ElasticSearch4JApp {
         typeMap.put("rfid", rfidList);
 
 
-        String[] day = ESUtil.getLastNDaysArr(2);
+        String[] day = ESUtil.getRangeDays(52, 10);
         long startTime = System.currentTimeMillis();
         for (int i = 1; i< day.length; i++) {
             // deleteIndex("person_track_" + day[i]);
-            // mockData("person_track_" + day[i]);
-            mockData("test_lzw_" + day[i]);
+            mockData("person_track_" + day[i]);
+            //mockData("test_lzw_" + day[i]);
         }
         long endTime = System.currentTimeMillis();
         long time = (endTime - startTime) / 1000;
