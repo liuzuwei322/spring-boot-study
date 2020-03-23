@@ -65,7 +65,7 @@ public class InsertToEs {
             map.put("lat", "31.1177078647");
             list.add(map);
         }
-        String[] rangeDays = ESUtil.getRangeDays(54, 69);
+        String[] rangeDays = ESUtil.getRangeDays(12, 20);
         for (int i = 0; i < rangeDays.length; i++) {
             batchInsert("person_track_" + rangeDays[i], list);
         }

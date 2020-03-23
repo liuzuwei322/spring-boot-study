@@ -156,7 +156,7 @@ public class ESUtil {
     }
 
     public static void main(String[] args) throws  Exception {
-        String[] daysArr = getRangeDays(52, 10);
+        String[] daysArr = getRangeDays(58, 3);
         System.out.println(Arrays.asList(daysArr));
         if (1 == 1) {
             return;

@@ -104,13 +104,14 @@ public class ElasticSearch4JApp {
         typeMap.put("rfid", rfidList);
 
 
-        String[] day = ESUtil.getRangeDays(52, 10);
+        String[] day = ESUtil.getRangeDays(58, 3);
         long startTime = System.currentTimeMillis();
-        for (int i = 1; i< day.length; i++) {
-            // deleteIndex("person_track_" + day[i]);
-            mockData("person_track_" + day[i]);
-            //mockData("test_lzw_" + day[i]);
-        }
+        mockData("person_track_20200101");
+//        for (int i = 1; i< day.length; i++) {
+//            // deleteIndex("person_track_" + day[i]);
+//            mockData("person_track_" + day[i]);
+//            //mockData("test_lzw_" + day[i]);
+//        }
         long endTime = System.currentTimeMillis();
         long time = (endTime - startTime) / 1000;
         System.out.println("批量插入完成，耗时：" + time + "秒");
