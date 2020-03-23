@@ -26,6 +26,19 @@ public class ZkWatchApi implements Watcher {
 
     private CountDownLatch connectedSemaphore = new CountDownLatch( 1 );
 
+
+    /**
+     * Watcher Server,处理收到的变更
+     * @param watchedEvent
+     */
+    @Override
+    public void process(WatchedEvent watchedEvent) {
+        LOG.info("收到事件通知：" + watchedEvent.getState() );
+        if ( Event.KeeperState.SyncConnected == watchedEvent.getState() ) {
+            connectedSemaphore.countDown();
+        }
+    }
+
     /**
      * 连接Zookeeper
      * @param connectString  Zookeeper服务地址
@@ -225,17 +238,7 @@ public class ZkWatchApi implements Watcher {
         return false;
     }
 
-    /**
-     * Watcher Server,处理收到的变更
-     * @param watchedEvent
-     */
-    @Override
-    public void process(WatchedEvent watchedEvent) {
-        LOG.info("收到事件通知：" + watchedEvent.getState() );
-        if ( Event.KeeperState.SyncConnected == watchedEvent.getState() ) {
-            connectedSemaphore.countDown();
-        }
-    }
+
 
     /**
      * 关闭ZK连接
