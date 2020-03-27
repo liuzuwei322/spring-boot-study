@@ -11,6 +11,7 @@ import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.apache.log4j.PropertyConfigurator;
 
 import java.io.IOException;
 import java.util.*;
@@ -25,6 +26,10 @@ public class InsertToEs {
 
     private static RestHighLevelClient client = new RestHighLevelClient(
             RestClient.builder(new HttpHost("10.133.143.27", 8089, "http")));
+
+    static {
+        PropertyConfigurator.configure("D:\\code\\IDEA\\myself\\spring-boot-study\\src\\main\\resources\\log4j.properties");
+    }
 
     public static void main(String[] args) {
         insertPersonInfo();

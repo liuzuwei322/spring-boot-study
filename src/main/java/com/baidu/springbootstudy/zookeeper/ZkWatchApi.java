@@ -162,8 +162,7 @@ public class ZkWatchApi implements Watcher {
             LOG.error( "更新数据失败, 发生InterruptedException! path: " + path + ", data:" + data
                     + ", errMsg:" + e.getMessage(), e );
         }
-        return false;
-    }
+        return false;    }
 
     /**
      * <p>读取指定节点数据内容,byte[] getData(path<节点路径>, watcher<监视器>, stat<数据版本号>)</p>
@@ -221,7 +220,7 @@ public class ZkWatchApi implements Watcher {
 
     /**
      * <p>判断某个zNode节点是否存在, Stat exists(path<节点路径>, watch<并设置是否监控这个目录节点，这里的 watcher 是在创建 ZooKeeper 实例时指定的 watcher>)</p>
-     * @param path zNode节点路径
+     * @param path zNode节点路径b
      * @return 存在返回true,反之返回false
      */
     public boolean isExists( String path ){
